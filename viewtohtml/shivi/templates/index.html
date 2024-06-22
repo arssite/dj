@@ -1,0 +1,23 @@
+
+<html>
+<head><title>anmol</title>
+</head>
+<body>
+<h1>Views Python data to Html Template</h1>
+<!------------{{keys}}----->
+<table>
+    
+        {% for i in keys %}
+        <tr><td>{{forloop.counter}}</td>
+        <td>{{i.name}}</td>
+        <td {% if i.age < 20 %} style="background: red" {% endif %}>{{i.age}}</td>
+        <td>{% if i.age > 20 %} Can Marry {% else %} can't Marry
+            {% endif %}
+        
+        {% endfor %}
+    </tr>
+</table>
+<br><br>    
+{{text | truncatechars:120}}
+<a href="https://docs.djangoproject.com/en/5.0/ref/templates/builtins/" >More Tags and Filters </a>
+</html>
