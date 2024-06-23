@@ -1,0 +1,159 @@
+<html>
+    <head><title>Arssite Checkout Form</title>
+<style>
+   
+    .row {
+        display: -ms-flexbox; 
+        display: flex;
+        -ms-flex-wrap: wrap; 
+        flex-wrap: wrap;
+        margin: 0 -16px;
+      }
+      
+      .col-25 {
+        -ms-flex: 25%; 
+        flex: 25%;
+      }
+      
+      .col-50 {
+        -ms-flex: 50%; 
+        flex: 50%;
+      }
+      
+      .col-75 {
+        -ms-flex: 60%; 
+        flex: 60%;
+        margin: 5% 5% 5% 5%;
+      }
+      
+      .col-25,
+      .col-50,
+      .col-75 {
+        padding: 0 16px;
+      }
+      
+      .container {
+        background-color: #71B298;
+        padding: 1px 20px 15px 20px;
+        border:3px solid black;
+        border-radius: 3px;
+        margin: 30%% 10%%;
+      }
+      
+      input[type=text] {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+      
+      label {
+        margin-bottom: 10px;
+        display: block;
+      }
+      
+      .icon-container {
+        margin-bottom: 20px;
+        padding: 7px 0;
+        font-size: 24px;
+      }
+      
+      .btn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 10px ;
+        margin: 0 auto;
+        border: none;
+
+        width: 70%;
+        border-radius: 3px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        text-align:center;
+        font-size: 17px;
+      }
+      
+      .btn:hover {
+        background-color: #45a049;
+      }
+      
+      span.price {
+        float: right;
+        color: grey;
+      }
+      
+      /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+      @media (max-width: 800px) {
+        .row {
+          flex-direction: column-reverse;
+        }
+        .col-25 {
+          margin-bottom: 20px;
+        }
+      }
+
+</style>
+</head>
+<body style="background-color: #0F524F;">
+    <div class="row">
+        <div class="col-75">
+          <div class="container">
+            <form method="post" enctype="multipart/form-data" >
+      {% csrf_token %}
+              <div class="row">
+                <div class="col-50">
+                  <h3>Chat And Contact Form</h3>
+                  <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                  <input type="text" id="fname" required name="fname" placeholder="ANMOL SRIVASTAVA">
+
+                  <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                  <input type="text" id="email" name="email" required  placeholder="arssite@example.com">
+
+                  <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                  <input type="text" id="adr" name="address" required placeholder="127 C Block Alpha ">
+
+                  <label for="city"><i class="fa fa-institution"></i> City</label>
+                  <input type="text" id="city" name="city" required placeholder="Greater Noida">
+
+      
+                  <div class="row">
+
+                    <div class="col-50">
+                      <label for="state">State</label>
+                      <input type="text" id="state" name="state" required placeholder="Uttar Pradesh">
+                    </div>
+
+                    <div class="col-50">
+                      <label for="zip">Zip</label>
+                      <input type="text" id="zip" name="zip" required placeholder="201310">
+                    </div>
+
+                    <div class="col-50">
+                    <label for="subject">Subject or Meassage</label>
+                    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px "></textarea>
+                    </div>
+                    
+                    
+
+                    <div class="col-50">
+                        <label for="Image">Any Image </label>
+                        <input type="file" id="myFile" name="image">
+                    </div>
+                
+                
+      
+                    
+            </div>
+        </div><br>
+        <br>
+              <input type="submit" value="Continue to checkout" class="btn">
+            </form>
+          </div>
+        </div>
+      
+       
+      </div>
+    </body>
+    </html>
