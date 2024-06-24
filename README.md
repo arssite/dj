@@ -1,3 +1,7 @@
+python -m venv ars <br>
+ars\Scripts\activate <br>
+______________________
+#for old version <br>
 pip install virtualenv<br>
 virtualenv ars<br>
 cd ars<br>
