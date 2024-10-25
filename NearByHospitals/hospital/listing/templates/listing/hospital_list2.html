@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Search</title>
+</head>
+<body>
+    <h1>Search Nearby Hospitals</h1>
+    
+    <!-- Form to input pincode -->
+    <form method="POST">
+        {% csrf_token %}
+        <label for="pincode">Enter Pincode:</label>
+        <input type="text" id="pincode" name="pincode" required>
+        <button type="submit">Search</button>
+    </form>
+    
+    <!-- Display the list of hospitals -->
+    {% if hospitals %}
+        <h2>Nearby Hospitals</h2>
+        <ul>
+            {% for hospital in hospitals %}
+                <li>
+                    <strong>Name:</strong> {{ hospital.name }}<br>
+                    <strong>Latitude:</strong> {{ hospital.lat }}<br>
+                    <strong>Longitude:</strong> {{ hospital.lon }}<br>
+                    <strong>Address:</strong> {{ hospital.address }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hospitals found.</p>
+    {% endif %}
+</body>
+</html>

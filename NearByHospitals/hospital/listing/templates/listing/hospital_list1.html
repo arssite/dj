@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Hospital Listings</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Find Nearby Hospitals or Clinics</h1>
+        
+        <!-- Search bar -->
+        <form method="GET">
+            <input type="text" name="pincode" class="form-control" placeholder="Enter your pincode">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        <!-- Filters -->
+        <form method="GET" class="mt-4">
+            <select name="area" class="form-control">
+                <option value="">Select Area</option>
+                <!-- Dynamically populate areas based on API -->
+                {% for hospital in hospitals %}
+                    <option value="{{ hospital.area }}">{{ hospital.area }}</option>
+                {% endfor %}
+            </select>
+            <select name="timings" class="form-control mt-2">
+                <option value="early">Early Opening</option>
+                <option value="late">Late Closing</option>
+            </select>
+            <select name="sort_by" class="form-control mt-2">
+                <option value="price_low_high">Price: Low to High</option>
+                <option value="distance_low_high">Distance: Low to High</option>
+            </select>
+        </form>
+
+        <!-- Hospital listing cards -->
+        <div class="row mt-4">
+            {% for hospital in hospitals %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ hospital.name }}</h5>
+                        <p class="card-text">{{ hospital.description }}</p>
+                        <p><strong>Price:</strong> {{ hospital.price }}</p>
+                        <p><strong>Distance:</strong> {{ hospital.distance }}</p>
+                        <a href="https://maps.google.com/?q={{ hospital.latitude }},{{ hospital.longitude }}" target="_blank" class="btn btn-primary">Open Map</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

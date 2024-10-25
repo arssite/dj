@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Search</title>
+    <style>
+        /* Centered Form and Elements */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f4f6f8;
+        }
+        h1 { color: #333; text-align: center; }
+        form, .controls { display: flex; justify-content: center; gap: 10px; }
+        form { margin-bottom: 20px; }
+        form input[type="text"], select { padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        form button { padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .hospital-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .hospital-card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 250px; }
+        .hospital-card button { margin-top: 10px; padding: 8px; width: 100%; border: none; border-radius: 5px; }
+        .google-maps { background-color: #28a745; color: #fff; }
+        .book-demo { background-color: #007bff; color: #fff; }
+    </style>
+</head>
+<body>
+    <h1>Search Nearby Hospitals</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" id="pincode" name="pincode" placeholder="Enter pincode" required>
+        <button type="submit">Search</button>
+    </form>
+    
+    <div class="controls">
+        <select name="sort-by" id="sort-by">
+            <option value="name">Sort by Name</option>
+            <option value="distance">Sort by Distance</option>
+        </select>
+        <select name="filter-by" id="filter-by">
+            <option value="open_now">Open Now</option>
+            <option value="highly_rated">Highly Rated</option>
+        </select>
+    </div>
+    
+    {% if hospitals %}
+        <div class="hospital-list">
+            {% for hospital in hospitals %}
+                <div class="hospital-card">
+                    <li>
+                    <strong>Name:</strong> {{ hospital.name }}<br>
+                    <strong>Latitude:</strong> {{ hospital.lat }}<br>
+                    <!--<strong>Longitude:</strong> {{ hospital.lon }}<br>
+                    <strong>Address:</strong> {{ hospital.address }}---->
+                </li>
+                    <!--<strong>{{ hospital.name }}</strong>
+                    <p>Latitude: {{ hospital.lat }}</p>
+                    <p>Longitude: {{ hospital.lon }}</p>
+                    <p>Address: {{ hospital.address }}</p>-->
+                    <button type="button" class="book-demo" onclick="alert('Demo booked for {{ hospital.name }}')">Book Demo</button>
+                    <button type="button" class="google-maps" onclick="window.open('https://www.google.com/maps/search/?api=1&query={{ hospital.name }},{{ hospital.address }}', '_blank')">Open in Google Maps</button>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No hospitals found.</p>
+    {% endif %}
+</body>
+</html>
